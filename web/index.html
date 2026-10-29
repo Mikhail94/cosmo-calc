@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Cosmo Calc</title>
+  <meta name="description" content="Калькулятор с темами «Космос» и «Китти»">
+  <meta name="theme-color" content="#05030f">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="space">
+  <canvas id="sky"></canvas>
+
+  <main class="app">
+    <!-- Украшения темы «Космос» -->
+    <svg class="deco space-only planet" viewBox="0 0 240 130" aria-hidden="true">
+      <defs>
+        <radialGradient id="planetGrad" cx="0.35" cy="0.35" r="0.75">
+          <stop offset="0" stop-color="#c77dff"/>
+          <stop offset="1" stop-color="#1e0b3a"/>
+        </radialGradient>
+      </defs>
+      <path d="M10 64 A110 22 0 0 1 230 64" fill="none" stroke="#b59cff" stroke-width="3"/>
+      <circle cx="120" cy="64" r="62" fill="url(#planetGrad)"/>
+      <path d="M10 64 A110 22 0 0 0 230 64" fill="none" stroke="#e0d2ff" stroke-width="3"/>
+    </svg>
+    <svg class="deco space-only moon" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="8" fill="#8d93ad"/>
+      <circle cx="5.5" cy="5.5" r="5.5" fill="#c7cbe0"/>
+    </svg>
+
+    <!-- Украшения темы «Китти» -->
+    <svg class="deco kitty-only cat" viewBox="0 0 140 100" aria-hidden="true">
+      <g stroke="#3a2a30" stroke-width="2" stroke-linejoin="round">
+        <polygon points="32,52 40,18 62,34" fill="#fff"/>
+        <polygon points="108,52 100,18 78,34" fill="#fff"/>
+        <ellipse cx="70" cy="61" rx="46" ry="29" fill="#fff"/>
+        <ellipse cx="53.5" cy="61" rx="3.5" ry="5" fill="#3a2a30" stroke="none"/>
+        <ellipse cx="86.5" cy="61" rx="3.5" ry="5" fill="#3a2a30" stroke="none"/>
+        <ellipse cx="70" cy="69" rx="5" ry="3" fill="#ffcc33" stroke-width="1"/>
+        <g stroke-linecap="round" fill="none">
+          <line x1="40" y1="62" x2="12" y2="58"/><line x1="40" y1="68" x2="12" y2="68"/><line x1="40" y1="74" x2="12" y2="78"/>
+          <line x1="100" y1="62" x2="128" y2="58"/><line x1="100" y1="68" x2="128" y2="68"/><line x1="100" y1="74" x2="128" y2="78"/>
+        </g>
+        <path d="M98 32 Q86 10 74 20 Q72 40 98 32 Z" fill="#ff3b7f"/>
+        <path d="M98 32 Q110 10 122 20 Q124 40 98 32 Z" fill="#ff3b7f"/>
+        <circle cx="98" cy="32" r="7" fill="#ff3b7f"/>
+      </g>
+    </svg>
+    <svg class="deco kitty-only flower" viewBox="0 0 40 40" aria-hidden="true">
+      <g fill="#fff" stroke="#ffb6cf">
+        <circle cx="20" cy="9" r="7"/><circle cx="30.5" cy="16.6" r="7"/><circle cx="26.5" cy="28.9" r="7"/>
+        <circle cx="13.5" cy="28.9" r="7"/><circle cx="9.5" cy="16.6" r="7"/>
+      </g>
+      <circle cx="20" cy="20" r="5" fill="#ffcc33"/>
+    </svg>
+
+    <section class="display">
+      <div class="display-top">
+        <span class="title" id="title">✦ COSMO CALC</span>
+        <button class="switch" id="themeSwitch" type="button">✦ космос ▸</button>
+      </div>
+      <div class="small" id="small"></div>
+      <div class="big" id="big">0</div>
+    </section>
+
+    <section class="keys" id="keys"></section>
+  </main>
+
+  <script src="calc.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

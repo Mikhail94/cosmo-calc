@@ -1,0 +1,172 @@
+@font-face {
+  font-family: "Fredoka";
+  src: url("fonts/fredoka.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+/* ---------- Темы ---------- */
+[data-theme="space"] {
+  --bg: #05030f;
+  --font: "Segoe UI", Roboto, system-ui, sans-serif;
+  --big-weight: 300;
+  --panel-fill: #080b22;
+  --panel-line: #5f7dff;
+  --glow1: #141a40; --glow2: #23306e; --glow3: #3f5bd6;
+  --title: #5f6aa8; --accent: #8fa6ff; --small: #8a93c9; --big: #eaf0ff;
+}
+[data-theme="space"] .k.num  { --fill: #12163a; --line: #3a4a9a; --text: #dfe6ff; --hfill: #1c2356; --hline: #7aa2ff; }
+[data-theme="space"] .k.op   { --fill: #1d0f3d; --line: #9b5cff; --text: #d6b8ff; --hfill: #2a1658; --hline: #c79bff; }
+[data-theme="space"] .k.func { --fill: #0d2a33; --line: #2fd3c9; --text: #9ff5ee; --hfill: #123b47; --hline: #7ffff4; }
+[data-theme="space"] .k.eq   { --fill: #ff6b35; --line: #ffc46b; --text: #1a0b00; --hfill: #ff8a4f; --hline: #ffe2a8; }
+
+[data-theme="kitty"] {
+  --bg: #ffe4ef;
+  --font: "Fredoka", "Segoe UI", Roboto, system-ui, sans-serif;
+  --big-weight: 400;
+  --panel-fill: #ffffff;
+  --panel-line: #ff9cc2;
+  --glow1: #ffd6e6; --glow2: #ffc2da; --glow3: #ff9cc2;
+  --title: #ff7aa8; --accent: #ff4f8f; --small: #c57a98; --big: #6b2a45;
+}
+[data-theme="kitty"] .k.num  { --fill: #ffffff; --line: #ffb6cf; --text: #7a3b55; --hfill: #fff0f6; --hline: #ff7aa8; }
+[data-theme="kitty"] .k.op   { --fill: #ffd1e3; --line: #ff7aa8; --text: #c2185b; --hfill: #ffbcd6; --hline: #ff4f8f; }
+[data-theme="kitty"] .k.func { --fill: #fff6d6; --line: #ffcf5c; --text: #a86b00; --hfill: #ffefb0; --hline: #ffb300; }
+[data-theme="kitty"] .k.eq   { --fill: #ff4f8f; --line: #ff9cc2; --text: #ffffff; --hfill: #ff6fa3; --hline: #ff2d78; }
+
+/* Обои в горошек для «Китти» */
+body[data-theme="kitty"] {
+  background-image:
+    radial-gradient(circle, #ffd0e2 5px, transparent 5.5px),
+    radial-gradient(circle, #ffd0e2 5px, transparent 5.5px);
+  background-size: 44px 40px;
+  background-position: 0 0, 22px 20px;
+}
+
+[data-theme="space"] .kitty-only,
+[data-theme="kitty"] .space-only { display: none; }
+
+/* ---------- Общая раскладка ---------- */
+html, body { margin: 0; height: 100%; }
+
+body {
+  background-color: var(--bg);
+  font-family: var(--font);
+  overflow: hidden;
+  touch-action: manipulation;          /* без зума от двойного касания */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; }
+
+.app {
+  position: relative;
+  box-sizing: border-box;
+  height: 100dvh;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: calc(env(safe-area-inset-top) + 76px) 18px calc(env(safe-area-inset-bottom) + 18px);
+}
+
+/* ---------- Украшения ---------- */
+.deco { position: absolute; pointer-events: none; }
+.planet { width: 230px; right: -46px; top: calc(env(safe-area-inset-top) - 24px); }
+.moon   { width: 16px;  left: 28px;   top: calc(env(safe-area-inset-top) + 26px); }
+.cat    { width: 132px; right: 8px;   top: calc(env(safe-area-inset-top) + 6px); }
+.flower { width: 34px;  left: 22px;   top: calc(env(safe-area-inset-top) + 18px); }
+
+/* ---------- Экран ---------- */
+.display {
+  position: relative;
+  z-index: 1;
+  border-radius: 22px;
+  background: var(--panel-fill);
+  border: 1px solid var(--panel-line);
+  box-shadow: 0 0 0 3px var(--glow1), 0 0 0 6px var(--glow2), 0 0 26px var(--glow3);
+  padding: 14px 18px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.display-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+.title { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: var(--title); }
+
+.switch {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--panel-fill);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.switch:active { background: color-mix(in srgb, var(--panel-fill), var(--accent) 20%); }
+
+.small {
+  margin-top: 14px;
+  min-height: 1.3em;
+  text-align: right;
+  font: 16px ui-monospace, Consolas, "Roboto Mono", monospace;
+  color: var(--small);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.big {
+  text-align: right;
+  font-size: clamp(40px, 13vw, 54px);
+  font-weight: var(--big-weight);
+  line-height: 1.2;
+  color: var(--big);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ---------- Кнопки ---------- */
+.keys {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.k {
+  font: inherit;
+  font-size: clamp(22px, 7vw, 28px);
+  font-weight: 600;
+  color: var(--text);
+  background: var(--fill);
+  border: 2px solid var(--line);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, box-shadow 0.12s, transform 0.08s;
+}
+.k.num { font-weight: 400; }
+
+@media (hover: hover) {
+  .k:hover {
+    background: var(--hfill);
+    border-color: var(--hline);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--hline) 45%, transparent);
+  }
+}
+
+.k.pressed {
+  background: color-mix(in srgb, var(--hfill), var(--hline));
+  border-color: #fff;
+  box-shadow: 0 0 18px var(--hline);
+  transform: scale(0.95);
+}
